@@ -17,7 +17,7 @@ public:
 
 };
 
-double distances(dot p, dot q)
+double distances(dot p, dot q) //test pass
 {
     int lx=p.x-q.x;
     int ly=p.y-q.y;
@@ -32,23 +32,50 @@ int closest(dot points[], int pointsLength)
 {
     if(pointsLength==2)
     {
-        return distance(points[0], points[1]);
+        return distances(points[0], points[1]);
     }
 
     /*******************start form here*************************/
+    int medianIndex=pointsLength/2; //find the median
+
+    dot sL[medianIndex+1];
+    dot sR[pointsLength-(medianIndex+1)];
+
+    //separate into sL, sR
+    for(int w=0;w<medianIndex+1;w++)
+    {
+        sL[w]=points[w];
+    }
+    for(int w=medianIndex+1, e=0;w<pointsLength;w++, e++)
+    {
+        sR[e]=points[w];
+    }
+
+    int dL=closest(sL, medianIndex+1);
+    int dR=closest(sR, pointsLength-(medianIndex+1));
+    int d=10000;
+
+    //min(dL, dR)
+    if(dL>dR) d=dR;
+    else if(dR>dL) d=dL;
+    else {d=dR;}
+
+
 }
 
 //test
-int main01()
+int main()
 {
     dot p=dot(0, 0);
     dot q=dot(1, 1);
-    double a=distances(p, q);
-    cout<<a;
+
+    dot ps[5];
+    for(int w=0;w<5;w++){ps[w]=dot(w, w);}
+    closest(ps, 5);
 }
 
 
-int main()
+int main01()
 {
     int n=0;
     cin>>n;
@@ -72,7 +99,7 @@ int main()
 
 
         //closest 2 points
-
+        closest(points, m);
 
     }
 }
