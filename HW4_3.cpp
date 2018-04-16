@@ -62,16 +62,16 @@ int MergeSort(int a[], int s, int e)
     MergeSort(a, s, q);
     MergeSort(a, q+1, e);
     Merge(a, s, q, e);
-    for(int i=0;i<6;i++) cout<<a[i]<<" ";
+    for(int i=0;i<8;i++) cout<<a[i]<<" ";
     cout<<endl;
     return 0;
 }
 
 int main()
 {
-    int a[6]={3, 5, 2, 4, 1, 0};
-    MergeSort(a, 0, 5);
-    for(int i=0;i<6;i++) cout<<a[i]<<" ";
+    int a[8]={3, 5, 2, 4, 1, 0, 7, 6};
+    MergeSort(a, 0, 7);
+    for(int i=0;i<8;i++) cout<<a[i]<<" ";
 }
 
 int main01()
