@@ -1,6 +1,10 @@
 #include<iostream>
+#include<queue>
 
 using namespace std;
+
+int tIndex=0;
+queue<int> myqueue;
 
 void Merge(int a[], int s, int q, int e)
 {
@@ -59,17 +63,29 @@ int MergeSort(int a[], int s, int e)
 {
     if(e==s) return 0;
     int q=(s+e)/2;
+
     MergeSort(a, s, q);
+    for(int i=s;i<=q;i++) myqueue.push(a[i]);
+
     MergeSort(a, q+1, e);
+    for(int i=q+1;i<=e;i++) myqueue.push(a[i]);
+
     Merge(a, s, q, e);
-    for(int i=0;i<8;i++) cout<<a[i]<<" ";
-    cout<<endl;
+    if(e==tIndex){
+        int temp1=e-s+1;
+        int temp2=tIndex+1;
+        int count1=0;
+        while(temp2!=temp1) {temp2=temp2/2; count1++;}
+        for(int i=0;i<=tIndex;i++) cout<<a[i]<<" ";
+        cout<<endl;
+    }
     return 0;
 }
 
 int main()
 {
     int a[8]={3, 5, 2, 4, 1, 0, 7, 6};
+    tIndex=7;
     MergeSort(a, 0, 7);
     for(int i=0;i<8;i++) cout<<a[i]<<" ";
 }
@@ -88,6 +104,9 @@ int main01()
 
     int nums[k]={0};
     for(int i=0;i<k;i++) cin>>nums[i];
+
+    tIndex=k-1;
+    MergeSort(nums, 0, k-1);
 
 
 
